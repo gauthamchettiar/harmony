@@ -91,7 +91,7 @@ class Github:
     def __make_api_call(self, api_path: str = "") -> dict[str, Any]:
         url = self.api_url + api_path
         headers = self.__prepare_headers()
-        logger.info(f"[CALLING API] -> {url}")
+        logger.debug(f"[CALLING API] -> {url}")
         response = requests.get(f"{url}", headers=headers)
         if response.status_code != 200:
             raise InvalidResponseException(
@@ -152,9 +152,7 @@ class Github:
                 break
             else:
                 self.metadata["readme"] = {"is_present": False, "url": None}
-                logger.warning(
-                    f"[README DOES NOT EXIST] File does not exist at {readme_url}"
-                )
+                logger.debug(f"Readme File does not exist at {readme_url}")
 
     def fetch_sample_config(self) -> None:
         for sample_config_name in constants.REMOTE_SAMPLE_CONFIG_NAMES:
@@ -173,9 +171,7 @@ class Github:
                 break
             else:
                 self.metadata["sample_config"] = {"is_present": False, "url": None}
-                logger.warning(
-                    f"[SAMPLE CONFIG DOES NOT EXIST] File does not exist at {sample_config_url}"
-                )
+                logger.debug(f"Config File does not exist at {sample_config_url}")
 
     def is_repo_fetched(self):
         return self.__fetched["repo"] is not None
@@ -278,19 +274,15 @@ class Github:
                 }
             )
         elif self.is_readme_fetched():
-            logger.warning("[SAMPLE CONFIG NOT FETCHED] Looking for Tables in README.")
+            logger.debug("Trying to fetch config from readme.")
             readme = self.__fetched["readme"]
             md_loader = ptr.TableTextLoader(readme, format_name="markdown")
             tables = [table for table in md_loader.load()]
 
             if len(tables) == 0:
-                logger.warning(
-                    "[README DOES NOT HAVE TABLE] Fetched Readme File does not have any tables."
-                )
+                logger.debug("Fetched Readme File does not have any tables.")
             elif len(tables) > 1:
-                logger.warning(
-                    "[README HAS MULTIPLE TABLES] Fetched Readme File has multiple tables, Fetching All."
-                )
+                logger.debug("Fetched Readme File has multiple tables, Fetching All.")
             else:
                 for i, table_data in enumerate(tables):
                     table = list(table_data.as_dict().values())[0]

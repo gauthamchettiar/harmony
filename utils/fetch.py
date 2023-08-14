@@ -19,16 +19,17 @@ class FetchFromFile:
     def fetch_crawl_status(self) -> dict:
         crawl_status_file_path = constants.STATUS_PATH(self.ot)
         try:
+            logger.debug(f"Reading Crawl Status From '{crawl_status_file_path}'")
             with open(crawl_status_file_path, "r") as crawl_status_file:
                 all_crawl_status = json.load(crawl_status_file)
                 return all_crawl_status[self.plugin_name][self.account]
         except FileNotFoundError:
-            logger.warning(
-                f"[FETCH ERROR] File {crawl_status_file_path} does not exist. Returning default crawl_status."
+            logger.debug(
+                f"File {crawl_status_file_path} does not exist. Returning default crawl_status."
             )
         except KeyError:
-            logger.warning(
-                f"[FETCH ERROR] File {crawl_status_file_path} does not contain key {self.plugin_name}.{self.account}. Returning default crawl_status."
+            logger.debug(
+                f"File {crawl_status_file_path} does not contain key {self.plugin_name}.{self.account}. Returning default crawl_status."
             )
         return constants.DEFAULT_CRAWL_STATUS
 
@@ -37,10 +38,13 @@ class FetchFromFile:
             self.ot, self.plugin_name, self.account
         )
         try:
+            logger.debug(f"Reading Metadata From '{metadata_file_path}'")
             with open(metadata_file_path, "r") as metadata_file:
                 return json.load(metadata_file)
         except FileNotFoundError:
-            logger.warning(f"[FETCH ERROR] File {metadata_file_path} does not exist.")
+            logger.debug(
+                f"File {metadata_file_path} does not exist. Returning default metadata."
+            )
         return self.__crawler.metadata
 
 

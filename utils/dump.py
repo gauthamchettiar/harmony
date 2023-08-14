@@ -29,8 +29,7 @@ class DumpToFile:
             else all_crawl_status[self.plugin_name]
         )
         all_crawl_status[self.plugin_name][self.account] = crawl_status
-        logger.debug(f"[PREPARED] crawl_status = {crawl_status}")
-        logger.info(f"[DUMPING] crawl_status to '{crawl_status_file_path}'")
+        logger.debug(f"Writing Crawl Status to '{crawl_status_file_path}'")
         with open(crawl_status_file_path, "w+") as crawl_status_file:
             json.dump(all_crawl_status, crawl_status_file)
 
@@ -39,8 +38,7 @@ class DumpToFile:
             self.ot, self.plugin_name, self.account
         )
         os.makedirs(os.path.dirname(metadata_file_path), exist_ok=True)
-        logger.debug(f"[PREPARED] metadata = {metadata}")
-        logger.info(f"[DUMPING] metadata to '{metadata_file_path}'")
+        logger.debug(f"Writing Metadata to '{metadata_file_path}'")
         with open(metadata_file_path, "w+") as metadata_file:
             json.dump(metadata, metadata_file)
 
@@ -49,6 +47,7 @@ class DumpToFile:
             self.ot, self.plugin_name, self.account
         )
         os.makedirs(os.path.dirname(readme_file_path), exist_ok=True)
+        logger.debug(f"Writing Readme to '{readme_file_path}'")
         with open(readme_file_path, "wb") as readme_file:
             if readme_contents is not None:
                 readme_file.write(readme_contents)
@@ -58,8 +57,7 @@ class DumpToFile:
             self.ot, self.plugin_name, self.account
         )
         os.makedirs(os.path.dirname(config_options_path), exist_ok=True)
-        logger.debug(f"[PREPARED] config_options = {config_options}")
-        logger.info(f"[DUMPING] config_options to '{config_options_path}'")
+        logger.info(f"Writing Config Options to '{config_options_path}'")
         with open(config_options_path, "w+") as metadata_file:
             try:
                 json.dump(config_options, metadata_file)
