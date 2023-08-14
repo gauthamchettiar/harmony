@@ -1,0 +1,4 @@
+loguru==0.7.0
+pytablereader==0.31.4
+requests==2.31.0
+Markdown==3.4.4
