@@ -57,7 +57,7 @@ class DumpToFile:
             self.ot, self.plugin_name, self.account
         )
         os.makedirs(os.path.dirname(config_options_path), exist_ok=True)
-        logger.info(f"Writing Config Options to '{config_options_path}'")
+        logger.debug(f"Writing Config Options to '{config_options_path}'")
         with open(config_options_path, "w+") as metadata_file:
             try:
                 json.dump(config_options, metadata_file)

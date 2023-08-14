@@ -30,7 +30,7 @@ class RunSync:
                     prev_crawl_status = fff.fetch_crawl_status()
 
                     if ffu.is_fetch_required(prev_crawl_status):
-                        logger.debug(f"New data available!")
+                        logger.info(f"New data available. Fetching Updates!")
                         stat_repo_updated += 1
                         if (readme := ffu.fetch_readme()) is not None:
                             dtf.dump_readme(readme)
