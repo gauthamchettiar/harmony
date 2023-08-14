@@ -144,7 +144,7 @@ class Github:
     def fetch_readme(self) -> None:
         for readme_name in constants.REMOTE_README_NAMES:
             readme_url = f"{self.raw_url}/{readme_name}"
-            logger.info(f"[CALLING API] -> {readme_url}")
+            logger.debug(f"[CALLING API] -> {readme_url}")
             response = requests.get(readme_url)
             if self.__is_response_valid(response):
                 self.__fetched["readme"] = response.content
@@ -157,7 +157,7 @@ class Github:
     def fetch_sample_config(self) -> None:
         for sample_config_name in constants.REMOTE_SAMPLE_CONFIG_NAMES:
             sample_config_url = f"{self.raw_url}/{sample_config_name}"
-            logger.info(f"[CALLING API] -> {sample_config_url}")
+            logger.debug(f"[CALLING API] -> {sample_config_url}")
             response = requests.get(sample_config_url)
             if self.__is_response_valid(response):
                 try:
