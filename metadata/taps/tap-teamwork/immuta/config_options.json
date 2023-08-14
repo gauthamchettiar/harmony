@@ -1,1 +1,1 @@
-[]
+[{"source": "sample_config", "content": {"api_key": "my_api_key", "hostname": "https://company.teamwork.com", "start_date": "2020-01-01T00:00:00Z"}, "instance": 0}]
