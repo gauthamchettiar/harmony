@@ -1,0 +1,1 @@
+[{"source": "readme", "content": [{"Setting": "api_key", "Required": true, "Default": "None", "Description": "Partoo API Key"}, {"Setting": "start_date", "Required": true, "Default": "None", "Description": "Start syncing data from that date"}], "instance": 0}]

@@ -1,0 +1,1 @@
+[{"source": "readme", "content": [{"Setting": "files", "Required": false, "Default": "None", "Description": "An array of Apache log file stream settings."}, {"Setting": "apachelog_files_definition", "Required": false, "Default": "None", "Description": "A path to the JSON file holding an array of file settings."}], "instance": 0}]

@@ -1,0 +1,1 @@
+[{"source": "sample_config", "content": {"disable_collection": false, "logging_level": "INFO", "destination_path": "/path/to/the/output/directory/", "compression_method": "snappy", "streams_in_separate_folder": false, "parquet_version": "2.4"}, "instance": 0}]

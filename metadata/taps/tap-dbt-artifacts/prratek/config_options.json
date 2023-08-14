@@ -1,0 +1,1 @@
+[{"source": "sample_config", "content": {"dbt_target_dir": "/path/to/dbt/target"}, "instance": 0}]

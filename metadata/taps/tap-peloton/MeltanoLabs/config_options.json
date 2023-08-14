@@ -1,0 +1,1 @@
+[{"source": "readme", "content": [{"Setting": "username", "Required": true, "Default": "None", "Description": "Your Peloton Username."}, {"Setting": "password", "Required": true, "Default": "None", "Description": "Your Peloton Password."}, {"Setting": "recent_workouts_number", "Required": false, "Default": "5", "Description": "The number of workouts to fetch."}], "instance": 0}]

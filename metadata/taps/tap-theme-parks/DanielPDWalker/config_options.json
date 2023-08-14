@@ -1,0 +1,1 @@
+[{"source": "readme", "content": [{"Setting": "live_data_array", "Required": "Optional", "Type": "Array of String", "Description": "An array of id or slugs (can be found from the destinations data) that you want to get live data for. This can include queue times, show times and operating hours.", "Environment Variable": "TAP_THEME_PARKS_LIVE_DATA_ARRAY"}], "instance": 0}]

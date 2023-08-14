@@ -1,0 +1,1 @@
+[{"source": "readme", "content": [{"Setting": "access_token", "Required": true, "Default": "None", "Description": "The token to authenticate against the API service"}, {"Setting": "device_uuid", "Required": false, "Default": "None", "Description": "The device's universally unique identifier (UUID)"}], "instance": 0}]
