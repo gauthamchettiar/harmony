@@ -69,9 +69,11 @@ tap-postgres/
     ├── config_options.json
     └── metadata.json
 ```
-Depending on whether a repository has README.md, it will be fetched. Depending on whether a repository has a sample config, it will be fetched as config_options.json.
+Depending on whether a repository has readme, it will be fetched as `README.md`
 
-Based on repository activity, metadata.json will be populated as -
+Depending on whether a repository has a sample config, it will be fetched as `config_options.json`
+
+Based on repository activity, `metadata.json` will be populated as -
 
 ```json
 {
@@ -117,6 +119,26 @@ Based on repository activity, metadata.json will be populated as -
     }
 }
 ```
+
+## How to add a new repository?
+Repositories for a particular tap will be present at [taps/repositories.json](metadata/taps/repositories.json) and [targets/repositories.json](metadata/targets/repositories.json).
+
+This stores nothing but a simple list of all repositories for a particular tap/target -
+
+```json
+{
+    ...
+
+    "tap-postgres": [
+        "https://github.com/transferwise/pipelinewise-tap-postgres", 
+        "https://github.com/MeltanoLabs/tap-postgres", 
+        "https://github.com/singer-io/tap-postgres"]
+
+    ...
+}
+```
+
+Simply adding an entry to above file should fetch the metadata for the same during next sync run. Feel free to raise PR if you see any tap/target missing. 
 
 ## How do you plan to maintain it in future?
 Project will be completely automated using Github actions. Metadata sync will be run weekly once, which will fetch details about any tap/target project and update the metadata. Since this does not involve any manual steps, unless there is a breaking change in github's API. this should always contain recent data on all repositories.
