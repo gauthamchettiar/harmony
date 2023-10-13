@@ -1,1 +1,1 @@
-[{"source": "readme", "content": [{"Name": "client_id", "Required": "Yes", "Default": "", "Description": "Your tap-spotify app client ID"}, {"Name": "client_secret", "Required": "Yes", "Default": "", "Description": "Your tap-spotify app client secret"}, {"Name": "refresh_token", "Required": "Yes", "Default": "", "Description": "Your tap-spotify app refresh token"}], "instance": 0}]
+[]
