@@ -1,5 +1,10 @@
 # `target-postgres`
 
+![PyPI - Version](https://img.shields.io/pypi/v/meltanolabs-target-postgres)
+![PyPI - Downloads](https://img.shields.io/pypi/dm/meltanolabs-target-postgres)
+![PyPI - License](https://img.shields.io/pypi/l/meltanolabs-target-postgres)
+![Test target-postgres](https://github.com/meltanolabs/target-postgres/actions/workflows/ci_workflow.yml/badge.svg)
+
 Target for Postgres.
 
 Built with the [Meltano SDK](https://sdk.meltano.com) for Singer Taps and Targets.
@@ -46,10 +51,8 @@ A full list of supported settings and capabilities is available by running: `tar
 
 ## Installation
 
-- [ ] `Developer TODO:` Come back to this re [#5](https://github.com/MeltanoLabs/target-postgres/issues/5)
-
 ```bash
-pipx install -e .
+pipx install meltanolabs-target-postgres
 ```
 
 ## Configuration
@@ -146,3 +149,69 @@ meltano invoke target-postgres --version
 
 See the [dev guide](https://sdk.meltano.com/en/latest/dev_guide.html) for more instructions on how to use the Meltano SDK to
 develop your own Singer taps and targets.
+
+## Data Types
+
+The below table shows how this tap will map between jsonschema datatypes and Postgres datatypes.
+
+| jsonschema                     | Postgres                                |
+|--------------------------------|-----------------------------------------|
+| integer                        | bigint                                  |
+| UNSUPPORTED                    | bigserial                               |
+| UNSUPPORTED                    | bit [ (n) ]                             |
+| UNSUPPORTED                    | bit varying [ (n) ]                     |
+| boolean                        | boolean                                 |
+| UNSUPPORTED                    | box                                     |
+| UNSUPPORTED                    | bytea                                   |
+| UNSUPPORTED                    | character [ (n) ]                       |
+| UNSUPPORTED                    | character varying [ (n) ]               |
+| UNSUPPORTED                    | cidr                                    |
+| UNSUPPORTED                    | circle                                  |
+| string with format="date"      | date                                    |
+| UNSUPPORTED                    | double precision                        |
+| UNSUPPORTED                    | inet                                    |
+| UNSUPPORTED                    | integer                                 |
+| UNSUPPORTED                    | interval [ fields ] [ (p) ]             |
+| UNSUPPORTED                    | json                                    |
+| array; object                  | jsonb                                   |
+| UNSUPPORTED                    | line                                    |
+| UNSUPPORTED                    | lseg                                    |
+| UNSUPPORTED                    | macaddr                                 |
+| UNSUPPORTED                    | macaddr8                                |
+| UNSUPPORTED                    | money                                   |
+| number                         | numeric [ (p, s) ]                      |
+| UNSUPPORTED                    | path                                    |
+| UNSUPPORTED                    | pg_lsn                                  |
+| UNSUPPORTED                    | pg_snapshot                             |
+| UNSUPPORTED                    | point                                   |
+| UNSUPPORTED                    | polygon                                 |
+| UNSUPPORTED                    | real                                    |
+| UNSUPPORTED                    | smallint                                |
+| UNSUPPORTED                    | smallserial                             |
+| UNSUPPORTED                    | serial                                  |
+| string without format; untyped | text                                    |
+| string with format="time"      | time [ (p) ] [ without time zone ]      |
+| UNSUPPORTED                    | time [ (p) ] with time zone             |
+| string with format="date-time" | timestamp [ (p) ] [ without time zone ] |
+| UNSUPPORTED                    | timestamp [ (p) ] with time zone        |
+| UNSUPPORTED                    | tsquery                                 |
+| UNSUPPORTED                    | tsvector                                |
+| UNSUPPORTED                    | txid_snapshot                           |
+| UNSUPPORTED                    | uuid                                    |
+| UNSUPPORTED                    | xml                                     |
+
+Note that while object types are mapped directly to jsonb, array types are mapped to a jsonb array.
+
+If a column has multiple jsonschema types, the following order is using to order Postgres types, from highest priority to lowest priority.
+- ARRAY(JSONB)
+- JSONB
+- TEXT
+- TIMESTAMP
+- DATETIME
+- DATE
+- TIME
+- DECIMAL
+- BIGINT
+- INTEGER
+- BOOLEAN
+- NOTYPE
