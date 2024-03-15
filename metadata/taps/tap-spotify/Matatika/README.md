@@ -4,6 +4,22 @@
 
 Built with the [Meltano Tap SDK](https://sdk.meltano.com) for Singer Taps.
 
+[![Python version](https://img.shields.io/badge/dynamic/toml?url=https%3A%2F%2Fraw.githubusercontent.com%2FMatatika%2Ftap-spotify%2Fmaster%2Fpyproject.toml&query=tool.poetry.dependencies.python&label=python)](https://docs.python.org/3/)
+[![Singer SDK version](https://img.shields.io/badge/dynamic/toml?url=https%3A%2F%2Fraw.githubusercontent.com%2FMatatika%2Ftap-spotify%2Fmaster%2Fpyproject.toml&query=tool.poetry.dependencies%5B%22singer-sdk%22%5D&label=singer-sdk)](https://sdk.meltano.com/en/latest/)
+[![License](https://img.shields.io/github/license/Matatika/tap-spotify)](https://github.com/Matatika/tap-spotify/blob/main/LICENSE)
+[![Code style](https://img.shields.io/endpoint?url=https%3A%2F%2Fraw.githubusercontent.com%2Fastral-sh%2Fruff%2Fmain%2Fassets%2Fbadge%2Fformat.json)](https://docs.astral.sh/ruff/)
+[![Test tap-spotify](https://github.com/Matatika/tap-spotify/actions/workflows/test.yml/badge.svg)](https://github.com/Matatika/tap-spotify/actions/workflows/test.yml)
+
+## Overview
+
+`tap-spotify` extracts raw data from the [Spotify Web API](https://developer.spotify.com/documentation/web-api) for the following resources:
+- [User's top tracks](https://developer.spotify.com/documentation/web-api/reference/get-users-top-artists-and-tracks)
+- [User's top artists](https://developer.spotify.com/documentation/web-api/reference/get-users-top-artists-and-tracks)
+- [User's saved tracks](https://developer.spotify.com/documentation/web-api/reference/get-users-saved-tracks)
+- [Global top 50 tracks (daily)](https://open.spotify.com/playlist/37i9dQZEVXbMDoHDwVN2tF)
+- [Global top 50 tracks (weekly)](https://open.spotify.com/playlist/37i9dQZEVXbNG2KDcFcKOF)
+- [Viral top 50 tracks(daily)](https://open.spotify.com/playlist/37i9dQZEVXbLiRSasKsNU9)
+
 ## Installation
 
 ```bash
