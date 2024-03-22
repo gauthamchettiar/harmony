@@ -1,8 +1,14 @@
 # tap-trello
 
-`tap-trello` is a Singer tap for trello.
+`tap-trello` is a Singer tap for Trello.
 
 Built with the [Meltano Tap SDK](https://sdk.meltano.com) for Singer Taps.
+
+[![Python version](https://img.shields.io/badge/dynamic/toml?url=https%3A%2F%2Fraw.githubusercontent.com%2FMatatika%2Ftap-trello%2Fmaster%2Fpyproject.toml&query=tool.poetry.dependencies.python&label=python)](https://docs.python.org/3/)
+[![Singer SDK version](https://img.shields.io/badge/dynamic/toml?url=https%3A%2F%2Fraw.githubusercontent.com%2FMatatika%2Ftap-trello%2Fmaster%2Fpyproject.toml&query=tool.poetry.dependencies%5B%22singer-sdk%22%5D&label=singer-sdk)](https://sdk.meltano.com/en/latest/)
+[![License](https://img.shields.io/github/license/Matatika/tap-trello)](https://github.com/Matatika/tap-trello/blob/main/LICENSE)
+[![Code style](https://img.shields.io/endpoint?url=https%3A%2F%2Fraw.githubusercontent.com%2Fastral-sh%2Fruff%2Fmain%2Fassets%2Fbadge%2Fformat.json)](https://docs.astral.sh/ruff/)
+[![Test tap-trello](https://github.com/Matatika/tap-trello/actions/workflows/test.yml/badge.svg)](https://github.com/Matatika/tap-trello/actions/workflows/test.yml)
 
 ## Installation
 
@@ -107,5 +113,5 @@ meltano elt tap-trello target-jsonl
 
 ### SDK Dev Guide
 
-See the [dev guide](https://sdk.meltano.com/en/latest/dev_guide.html) for more instructions on how to use the SDK to 
+See the [dev guide](https://sdk.meltano.com/en/latest/dev_guide.html) for more instructions on how to use the SDK to
 develop your own taps and targets.
