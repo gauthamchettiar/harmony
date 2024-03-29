@@ -46,6 +46,14 @@ plugins:
           kind: string
         - name: use_request_body_not_params
           kind: boolean
+        - name: backoff_type
+          kind: string
+        - name: backoff_param
+          kind: string
+        - name: backoff_time_extension
+          kind: integer
+        - name: store_raw_json_message
+          kind: boolean
         - name: pagination_page_size
           kind: integer
         - name: pagination_results_limit
@@ -56,6 +64,8 @@ plugins:
           kind: string
         - name: pagination_total_limit_param
           kind: string
+        - name: pagination_initial_offset
+          kind: integer
         - name: streams
           kind: array
         - name: name
@@ -137,12 +147,17 @@ provided at the top-level will be the default values for each stream.:
 - `api_url`: required: the base url/endpoint for the desired api.
 - `pagination_request_style`: optional: style for requesting pagination, defaults to `default` which is the `jsonpath_paginator`, see Pagination below.
 - `pagination_response_style`: optional: style of pagination results, defaults to `default` which is the `page` style response, see Pagination below.
-- `use_request_body_not_params`: optional: sends the request parameters in the request body. This is normally not required, a few API's like OpenSearch require this. Defaults to `False`"
+- `use_request_body_not_params`: optional: sends the request parameters in the request body. This is normally not required, a few API's like OpenSearch require this. Defaults to `False`.
+- `backoff_type`: optional: The style of Backoff [message|header] applied to rate limited APIs. Backoff times (seconds) come from response either the `message` or `header`. Defaults to `None`.
+- `backoff_param`: optional: the header parameter to inspect for a backoff time. Defaults to `Retry-After`.
+- `backoff_time_extension`: optional: An additional extension (seconds) to the backoff time over and above a jitter value - use where an API is not precise in it's backoff times. Defaults to `0`.
+- `store_raw_json_message`: optional: An additional extension which will emit the whole message into an field `_sdc_raw_json`. Useful for a dynamic schema which cannot be automatically discovered. Defaults to `False`.
 - `pagination_page_size`: optional: limit for size of page, defaults to None.
 - `pagination_results_limit`: optional: limits the max number of records. Note: Will cause an exception if the limit is hit (except for the `restapi_header_link_paginator`). This should be used for development purposes to restrict the total number of records returned by the API. Defaults to None.
 - `pagination_next_page_param`: optional: The name of the param that indicates the page/offset. Defaults to None.
 - `pagination_limit_per_page_param`: optional: The name of the param that indicates the limit/per_page. Defaults to None.
 - `pagination_total_limit_param`: optional: The name of the param that indicates the total limit e.g. total, count. Defaults to total
+- `pagination_initial_offset`: optional: The initial offset for the first request. Defaults to 1.
 - `next_page_token_path`: optional: a jsonpath string representing the path to the "next page" token. Defaults to `'$.next_page'` for the `jsonpath_paginator` paginator only otherwise None.
 - `streams`: required: a list of objects that contain the configuration of each stream. See stream-level params below.
 - `path`: optional: see stream-level params below.
@@ -297,6 +312,7 @@ There are additional request styles supported as follows for pagination.
   - `pagination_limit_per_page_param` - the name of the API parameter to limit number of records per page. Default parameter name `limit`.
   - `pagination_total_limit_param` - The name of the param that indicates the total limit e.g. total, count. Defaults to total
   - `next_page_token_path` - Used to locate an appropriate link in the response. Default None - but looks in the `pagination` section of the JSON response by default. Example, jsonpath to get the offset from the NOAA API `'$.metadata.resultset'`.
+  - `pagination_initial_offset` - The initial offset for the first request. Defaults to 1.
 - `simple_header_paginator` - This style uses links in the Header Response to locate the next page. Example the `x-next-page` link used by the Gitlab API.
 - `header_link_paginator` - This style uses the default header link paginator from the Meltano SDK.
 - `restapi_header_link_paginator` - This style is a variant on the header_link_paginator. It supports the ability to read from GitHub API.
