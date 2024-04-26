@@ -56,14 +56,26 @@ Your `sheet_id` are the characters after `spreadsheets/d/`, so in this case woul
 
 ### Credentials
 
+Setting | Required | Type             | Description |
+------- | -------- |------------------| ----------- |
+`oauth_credentials.client_id` | Required | String           | Your google client id
+`oauth_credentials.client_secret` | Required | String           | Your google client secret
+`oauth_credentials.refresh_token` | Required | String           | Your google refresh token
+`sheet_id` | Required | String           | Your target google sheet id
+`output_name` | Optional | String           | Optionailly rename the stream and output file or table from the tap
+`child_sheet_name` | Optional | String           | Optionally choose a different sheet from your Google Sheet file
+`range` | Optional | String | Optionally choose a range of data from your Google Sheet file (defaults to the entire sheet)<br><br>Range is defined using [A1 notation](https://developers.google.com/sheets/api/guides/concepts#expandable-1) and is start/end inclusive. Examples:<ul><li>`B5:G45` - start at `B5` and end at `G45`</li><li>`A:T` - start at `A1` and end at the last cell of column `T` (same as `A1:T` and `A:T1`)</li><li>`3:5` - start at `A3` and end at the last cell of row `5` (same as `A3:5` and `3:A5`)</li><li>`D3:ZZZ` - start at `D3` and end at the last cell in the sheet</li></ul>
+`key_properties` | Optional | Array of Strings | Optionally choose primary key column(s) from your Google Sheet file. Example: `["column_one", "column_two"]`
+`sheets` | Optional | Array of Objects | Optionally provide a list of configs for each sheet/stream. See "Per Sheet Config" below. Overrides the `sheet_id` provided at the root level.
+
+### Per Sheet Config
+
 Setting | Required | Type | Description |
 ------- | -------- | ---- | ----------- |
-`oauth_credentials.client_id` | Required | String | Your google client id
-`oauth_credentials.client_secret` | Required | String | Your google client secret
-`oauth_credentials.refresh_token` | Required | String | Your google refresh token
 `sheet_id` | Required | String | Your target google sheet id
-`stream_name` | Optional | String | Optionailly rename the stream and output file or table from the tap
+`output_name` | Optional | String | Optionailly rename the stream and output file or table from the tap
 `child_sheet_name` | Optional | String | Optionally choose a different sheet from your Google Sheet file
+`range` | Optional | String | Optionally choose a range of data from your Google Sheet file (defaults to the entire sheet)<br><br>Range is defined using [A1 notation](https://developers.google.com/sheets/api/guides/concepts#expandable-1) and is start/end inclusive. Examples:<ul><li>`B5:G45` - start at `B5` and end at `G45`</li><li>`A:T` - start at `A1` and end at the last cell of column `T` (same as `A1:T` and `A:T1`)</li><li>`3:5` - start at `A3` and end at the last cell of row `5` (same as `A3:5` and `3:A5`)</li><li>`D3:ZZZ` - start at `D3` and end at the last cell in the sheet</li></ul>
 `key_properties` | Optional | Array of Strings | Optionally choose primary key column(s) from your Google Sheet file. Example: `["column_one", "column_two"]`
 
 ### Environment Variable
@@ -73,9 +85,11 @@ These settings expand into environment variables of:
 - `TAP_GOOGLE_SHEETS_OAUTH_CREDENTIALS_CLIENT_SECRET`
 - `TAP_GOOGLE_SHEETS_OAUTH_CREDENTIALS_REFRESH_TOKEN`
 - `TAP_GOOGLE_SHEETS_SHEET_ID`
-- `TAP_GOOGLE_SHEETS_STREAM_NAME`
+- `TAP_GOOGLE_SHEETS_OUTPUT_NAME`
 - `TAP_GOOGLE_SHEETS_CHILD_SHEET_NAME`
+- `TAP_GOOGLE_SHEETS_RANGE`
 - `TAP_GOOGLE_SHEETS_KEY_PROPERTIES`
+- `TAP_GOOGLE_SHEETS_SHEETS`
 
 ---
 
@@ -91,11 +105,13 @@ These settings expand into environment variables of:
 
 * If syncing to a database it will not respect duplicated column names. The last column with the same name will be the only one synced along with its data.
 
-* The tap will use your Google Sheet's name as output file or table name unless you set a `stream_name`. It will replace any spaces with underscores.
+* The tap will use your Google Sheet's name as output file or table name unless you set an `output_name`. It will replace any spaces with underscores.
 
 * The tap will again replace any spaces in column names with underscores.
 
 * When using the `key_properties` setting, you must choose columns with no null values.
+
+* You can extract multiple sheets using the `sheets` config, which is just an array containing configurable properties for each item. Doing so will ignore any sheet config defined by the root level `sheet_id`, `output_name`, `child_sheet_name`, `key_properties` properties.
 
 ### Loaders Tested
 
@@ -109,7 +125,7 @@ These settings expand into environment variables of:
 
 ## Roadmap
 
-- [ ] Add setting to optionally allow the selection of a range of data from a sheet. (Add an optional range setting).
+- [x] Add setting to optionally allow the selection of a range of data from a sheet. (Add an optional range setting).
 
 - [ ] Improve default behavior of a sheet with multiple columns of the same name and `target-postgres`.
 
