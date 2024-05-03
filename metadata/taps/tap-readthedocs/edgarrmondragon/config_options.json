@@ -1,1 +1,1 @@
-[{"source": "readme", "content": [{"Setting": "token", "Required": true, "Default": "None", "Description": ""}], "instance": 0}]
+[{"source": "readme", "content": [{"Setting": "token", "Required": true, "Default": "None", "Description": ""}, {"Setting": "include_business_streams", "Required": false, "Default": "False", "Description": "Whether to include streams available only to ReadTheDocs for Business accounts"}], "instance": 0}]
